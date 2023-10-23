@@ -34,7 +34,7 @@ function AuthProvider({ children }) {
         setState({});
     }
 
-    async function updateProfile({ user, avatarFile }) {
+    async function updateProfile({ userUpdated, avatarFile }) {
         try {
 
             if (avatarFile) {
@@ -42,13 +42,13 @@ function AuthProvider({ children }) {
                 fileUploadForm.append("avatar", avatarFile);
 
                 const response = await api.patch("/users/avatar", fileUploadForm);
-                user.avatar = response.data.avatar;
+                userUpdated.avatar = response.data.avatar;
             }
 
-            const response = await api.put("/users", user);
+            const response = await api.put("/users", userUpdated);
             localStorage.setItem(LOCALSTORAGE_ROCKETNOTES_USER, JSON.stringify(response.data.userByEmail));
             
-            setState({ user, token: state.token });
+            setState({ user: userUpdated, token: state.token });
 
             alert(response.data.Message);
         }
