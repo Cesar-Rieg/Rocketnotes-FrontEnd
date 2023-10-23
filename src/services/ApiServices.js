@@ -1,6 +1,8 @@
 import axios from "axios";
-const PORT = 3333;
+
+//const LOCAL_URL = `http://localhost:3000`;
+const PROD_URL = 'https://rocketnotes-api-cuvp.onrender.com';
 
 export const api = axios.create({
-    baseURL: `http://localhost:${PORT}`
+    baseURL: PROD_URL
 });
